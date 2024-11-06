@@ -13,6 +13,4 @@ function genOtp(length = 6) {
     return otp;  // trả về mã OTP
 }
 
-module.exports = {
-    genOtp
-};
+export default genOtp;

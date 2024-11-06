@@ -8,4 +8,4 @@ const checkSpam = async function (req, res) {
     })
 }
 
-module.exports = { checkSpam };
+export default checkSpam;

@@ -1,9 +1,9 @@
-const express = require('express');
-const db = require('./configs/db'); // Import db config
-const otpRoutes = require('./routes/otpRoutes');
-const spamRoutes = require('./routes/spamRoutes'); // Import spamRoutes
+import  express from 'express'
+import db from './configs/db.js'
+import otpRoutes from './routes/otpRoutes.js';
+import spamRoutes from './routes/spamRoutes.js';
 
-const errorMiddleware = require('./middlewares/error');
+import errorMiddleware from './middlewares/error.js';
 
 const app = express();
 app.use(express.json());
@@ -27,4 +27,4 @@ app.use('/api/v1/spam', spamRoutes);
 // Sử dụng middleware xử lý lỗi
 app.use(errorMiddleware);
 
-module.exports = app;
+export default app

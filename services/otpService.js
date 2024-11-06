@@ -1,8 +1,10 @@
-const https = require('https');
-require('dotenv').config();
+import https from 'https';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 // Gửi OTP qua Infobip
-const sendOtp = (phoneNumber, otp) => {
+function sendOtp  (phoneNumber, otp) {
     const payload = JSON.stringify({
         messages: [
             {
@@ -50,6 +52,4 @@ const sendOtp = (phoneNumber, otp) => {
     });
 };
 
-module.exports = {
-    sendOtp
-};
+export default sendOtp

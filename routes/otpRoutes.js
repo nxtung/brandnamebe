@@ -1,7 +1,8 @@
-const express = require('express');
+import express from 'express';
+import { createOtp, getOtps, deleteOtp } from '../controllers/otpController.js'
+import checkApiKey from '../middlewares/checkApiKey.js';
+
 const router = express.Router();
-const { createOtp, getOtps, deleteOtp } = require('../controllers/otpController');
-const checkApiKey = require('../middlewares/checkApiKey'); // Import middleware kiểm tra API Key
 
 // Route để tạo OTP
 router.post('/', checkApiKey, createOtp);
@@ -12,4 +13,4 @@ router.get('/', getOtps);
 // Route để xóa OTP theo ID
 router.delete('/:id', deleteOtp);
 
-module.exports = router;
+export default router;

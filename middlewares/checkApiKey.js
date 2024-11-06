@@ -1,4 +1,6 @@
-require('dotenv').config();
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const API_KEY = process.env.IDENTIFY_KEY; // Lấy API Key từ biến môi trường
 
@@ -19,4 +21,4 @@ const checkApiKey = (req, res, next) => {
     next(); // Nếu không phải POST hoặc API Key hợp lệ, tiếp tục tới route tiếp theo
 };
 
-module.exports = checkApiKey;
+export default checkApiKey;

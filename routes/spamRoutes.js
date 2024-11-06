@@ -1,9 +1,9 @@
-const express = require('express');
-const { checkSpam } = require('../controllers/spamController');
+import express from 'express';
+import  checkSpam  from '../controllers/spamController.js';
 
 const router = express.Router();
 
 // Route để kiểm tra spam
 router.get('/', checkSpam);
 
-module.exports = router;
+export default router;

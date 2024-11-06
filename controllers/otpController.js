@@ -1,28 +1,9 @@
-const db = require('../configs/db');
-const otpService = require('../services/otpService');
-const { genOtp } = require('../utils/otpUtils'); // Import hàm genOtp
+import db from '../configs/db.js';
+import otpService from '../services/otpService.js';
+import  genOtp  from '../utils/otpUtils.js';
 
 // Tạo OTP mới
-exports.createOtp = async (req, res) => {
-    // const { otp, phoneNumber } = req.body;
-
-    // const stmt = db.prepare("INSERT INTO otps (otp, phoneNumber, messageId, expired_at) VALUES (?, ?, ?, ?)");
-    // stmt.run(otp, phoneNumber, messageId, expired_at, function(err) {
-    //     if (err) {
-    //         return res.status(500).json({ message: err.message });
-    //     }
-
-    //     res.status(201).json({ 
-    //         id: this.lastID, 
-    //         otp, 
-    //         phoneNumber, 
-    //         messageId, 
-    //         expired_at,
-    //         created_at: new Date().toISOString() // Có thể trả về thời gian tạo nếu cần
-    //     });
-    // });
-    // stmt.finalize();
-
+async function createOtp (req, res) {
     try {
         const { phoneNumber } = req.body;
         const otp = genOtp();
@@ -31,14 +12,13 @@ exports.createOtp = async (req, res) => {
         const messageId = JSON.parse(otpResponse).messages[0].messageId;
         await saveOtp(otp, phoneNumber, messageId);
         res.send(otpResponse);
-        // res.send({ "messages": [200], "otp": otp });
     } catch (error) {
         res.status(500).send({ "messages": [500] });
     }
 };
 
 // Lấy danh sách tất cả OTPs
-exports.getOtps = (req, res) => {
+async function getOtps (req, res) {
     db.all("SELECT * FROM otps", [], (err, rows) => {
         if (err) {
             return res.status(500).json({ message: err.message });
@@ -48,7 +28,7 @@ exports.getOtps = (req, res) => {
 };
 
 // Xoá OTP theo ID
-exports.deleteOtp = (req, res) => {
+async function deleteOtp (req, res) {
     const id = req.params.id;
 
     const stmt = db.prepare("DELETE FROM otps WHERE id = ?");
@@ -79,3 +59,5 @@ function saveOtp(otp, phoneNumber, messageId) {
         });
     });
 }
+
+export  { createOtp, getOtps, deleteOtp }
