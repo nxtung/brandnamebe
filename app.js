@@ -3,6 +3,7 @@ import db from './configs/db.js'
 import otpRoutes from './routes/otpRoutes.js';
 import spamRoutes from './routes/spamRoutes.js';
 import ekycTokensRoutes from './routes/ekycTokensRoutes.js';
+import healthRoutes from './routes/healthRoutes.js';
 
 import errorMiddleware from './middlewares/error.js';
 
@@ -25,6 +26,7 @@ db.serialize(() => {
 app.use('/api/v1/opts', otpRoutes);
 app.use('/api/v1/spam', spamRoutes); 
 app.use('/api/v1/ekycTokens', ekycTokensRoutes); 
+app.use('/api/v1/health', healthRoutes); 
 
 // Sử dụng middleware xử lý lỗi
 app.use(errorMiddleware);
